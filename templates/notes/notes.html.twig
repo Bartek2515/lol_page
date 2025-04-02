@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NotesController!{% endblock %}
+
+{% block body %}
+
+{% if app.user %}
+    <div class="mb-3 ">
+        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
+{% endif %}
+
+<table class="border border-gray-300">
+    <thead>
+        <tr>
+            <th class="p-2 border border-gray-300">Rola</th>
+            <th class="p-2 border border-gray-300">Postać którą grasz</th>
+            <th class="p-2 border border-gray-300">Postać na którą grasz</th>
+            <th class="p-2 border border-gray-300">Notatka</th>
+            <th class="p-2 border border-gray-300">Drzewko runy</th>
+            <th class="p-2 border border-gray-300">Tier 1 runa</th>
+            <th class="p-2 border border-gray-300">Tier 2 runa</th>
+            <th class="p-2 border border-gray-300">Tier 3 runa</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in counterGuides %}
+    <tr>
+        <td class="p-2 border border-gray-300">{{ item.counterGuide.role }}</td>
+        <td class="p-2 border border-gray-300">{{ item.counterGuide.champion.name }}</td>
+        <td class="p-2 border border-gray-300">{{ item.counterGuide.targetChampion.name }}</td>
+        <td class="p-2 border border-gray-300">{{ item.counterGuide.notes }}</td>
+        
+        {% if item.runes is not empty %}
+            <td class="p-2 border border-gray-300">{{ item.runes[0].tree }}</td>
+        {% else %}
+            <td class="p-2 border border-gray-300">No tree</td>
+        {% endif %}
+        
+        {% for runa in item.runes %}
+            {% if runa is not empty %}
+                <td class="p-2 border border-gray-300">{{ runa.name }}</td>
+            {% else %}
+                <td class="p-2 border border-gray-300">No rune</td>
+            {% endif %}
+        {% endfor %}
+        
+        <td class="p-2 border border-gray-300">
+            {# Miejsce na dodatkowe akcje, np. edytuj #}
+            <a href="#">Edit</a>
+        </td>
+        <td class="p-2 border border-gray-300">
+            {# Miejsce na dodatkowe akcje, np. usuń #}
+            <a href="#">Delete</a>
+        </td>
+    </tr>
+    {% endfor %} 
+    </tbody>
+</table>
+{% endblock %}
