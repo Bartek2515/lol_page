@@ -26,4 +26,18 @@ class NotesService
 
         return $result;      
     }
+    public function getCounterGuideById($user,$id )
+    {
+        $result = [];
+        $counterGuides = $this->counterRepo->getCounterGuideById($user, $id);
+        
+        foreach ($counterGuides as $counterGuide) {
+            $result[] = [
+                'counterGuide' => $counterGuide,              // Obiekt CounterGuide
+                'runes' => $counterGuide->getRunes()->toArray() // Tablica run
+            ];
+        }
+
+        return $result;
+    }
 }

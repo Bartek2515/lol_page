@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NotesController!{% endblock %}
+
+{% block body %}
+    <form action="POST">
+        <input type="text" name="role" placeholder="Role" value="{{ counterGuides[0].counterGuide.role }}">
+        <input type="text" name="champion" placeholder="Champion" value="{{ counterGuides[0].counterGuide.champion.name }}">
+        <input type="text" name="targetChampion" placeholder="Target Champion" value="{{ counterGuides[0].counterGuide.targetChampion.name }}">
+        <input type="text" name="notes" placeholder="Notes" value="{{ counterGuides[0].counterGuide.notes }}">
+        <input type="text" name="tree" placeholder="Tree" value="{{ counterGuides[0].runes[0].tree }}">
+        <input type="text" name="rune1" placeholder="Rune 1" value="{{ counterGuides[0].runes[0].name }}">
+        <input type="text" name="rune2" placeholder="Rune 2" value="{{ counterGuides[0].runes[1].name }}">
+        <input type="text" name="rune3" placeholder="Rune 3" value="{{ counterGuides[0].runes[2].name }}">
+        
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

@@ -37,20 +37,31 @@
             <td class="p-2 border border-gray-300">No tree</td>
         {% endif %}
         
-        {% for runa in item.runes %}
-            {% if runa is not empty %}
-                <td class="p-2 border border-gray-300">{{ runa.name }}</td>
-            {% else %}
-                <td class="p-2 border border-gray-300">No rune</td>
-            {% endif %}
-        {% endfor %}
+        {% if item.runes is not empty %}
+            <td class="p-2 border border-gray-300">{{ item.runes[0].name }}</td>
+        {% else %}
+            <td class="p-2 border border-gray-300">No rune</td>
+        {% endif %}
+
+        {% if item.runes is not empty %}
+            <td class="p-2 border border-gray-300">{{ item.runes[1].name }}</td>
+        {% else %}
+            <td class="p-2 border border-gray-300">No rune</td>
+        {% endif %}
+
+        {% if item.runes is not empty %}
+            <td class="p-2 border border-gray-300">{{ item.runes[2].name }}</td>
+        {% else %}
+            <td class="p-2 border border-gray-300">No rune</td>
+        {% endif %}
+
         
         <td class="p-2 border border-gray-300">
-            {# Miejsce na dodatkowe akcje, np. edytuj #}
-            <a href="#">Edit</a>
+            
+            <a href="{{ path('app_edit_counter_guide', {'id': item.counterGuide.id}) }}">Edit</a>
         </td>
         <td class="p-2 border border-gray-300">
-            {# Miejsce na dodatkowe akcje, np. usuń #}
+            
             <a href="#">Delete</a>
         </td>
     </tr>

@@ -28,19 +28,29 @@ class RegistrationController extends AbstractController
             }
             if($request->request->get('inputLastName')){
                 $user->setLastName($request->request->get('inputLastName'));
+            }else{
+                return $this->redirectToRoute('app_register');
             }
             if($request->request->get('inputUsername')){
                 $user->setUsername($request->request->get('inputUsername'));
+            }else{
+                return $this->redirectToRoute('app_register');
             }
             if($request->request->get('inputEmail')){
                 $user->setEmail($request->request->get('inputEmail'));
+            }else{
+                return $this->redirectToRoute('app_register');
             }
             if($request->request->get('inputEmail')){
                 $user->setEmail($request->request->get('inputEmail'));
+            }else{
+                return $this->redirectToRoute('app_register');
             }
             
             if($request->request->get('inputPassword')){
                 $user->setPassword($userPasswordHasher->hashPassword($user, $request->request->get('inputPassword')));
+            }else{
+                return $this->redirectToRoute('app_register');
             }
 
             if ( $userRepo->findOneBy(['email' => $user->getEmail()]) ) {

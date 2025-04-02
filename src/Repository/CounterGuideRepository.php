@@ -16,6 +16,18 @@ class CounterGuideRepository extends ServiceEntityRepository
         parent::__construct($registry, CounterGuide::class);
     }
 
+    public function getCounterGuideById($user, $id)
+    {
+        $userId = $user->getId();
+        return $this->createQueryBuilder('cg')
+            ->where('cg.id = :id')
+            ->andWhere('cg.user = :userId')
+            ->setParameter('id', $id)
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();    
+    }
+
 //    /**
 //     * @return CounterGuide[] Returns an array of CounterGuide objects
 //     */
