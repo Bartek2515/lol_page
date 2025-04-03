@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NotesController!{% endblock %}
+
+{% block body %}
+{% if app.user %}
+            <div class="mb-3 ">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+{% endif %}
+    
+    <form method="POST" action="{{ path('app_add_counter_guide') }}">
+        
+        
+        
+        <input type="text" name="role" placeholder="Role" value="">
+        <input type="text" name="champion" placeholder="Champion" value="">
+        <input type="text" name="targetChampion" placeholder="Target Champion" value="">
+        <input type="text" name="notes" placeholder="Notes" value="">
+        <input type="text" name="tree" placeholder="Tree" value="">
+        <input type="text" name="rune1" placeholder="Rune 1" value="">
+        <input type="text" name="rune2" placeholder="Rune 2" value="">
+        <input type="text" name="rune3" placeholder="Rune 3" value="">
+        <input type="text" name="rune4" placeholder="Rune 4" value="">
+        
+        
+        <input type="submit" value="Submit">
+        
+    </form>
+ 
+{% endblock %}

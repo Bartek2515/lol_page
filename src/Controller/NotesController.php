@@ -41,7 +41,7 @@ final class NotesController extends AbstractController
         }
         
         if ($request->isMethod('POST')) {
-            return $this->redirectToRoute('app_counter_guide');
+            dd($request->request->get('role'));
         }
         
         return $this->render('notes/edit.html.twig',[
@@ -62,26 +62,28 @@ final class NotesController extends AbstractController
             
         }
         
-        return $this->render('notes/edit.html.twig',[
+        return $this->render('notes/delete.html.twig',[
             'counterGuides' => $counterGuides,
         ]);
     }
+    
     #[Route('/add', name: 'app_add_counter_guide')]
     public function add(Request $request): Response
     {
         $user = $this->getUser();
-        $counterGuides = $this->notesService->getCounterGuideById($user, $id);
+        
         
         if (!$user) {
             return $this->redirectToRoute('app_login');
         }
         
         if ($request->isMethod('POST')) {
-            
+            $this->notesService->addCounterGuide($request->request->all(), $user);
         }
         
-        return $this->render('notes/edit.html.twig',[
-            'counterGuides' => $counterGuides,
+        
+        return $this->render('notes/add.html.twig',[
+            
         ]);
     }
 }
