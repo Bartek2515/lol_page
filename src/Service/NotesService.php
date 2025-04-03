@@ -5,13 +5,15 @@ namespace App\Service;
 use App\Entity\Champion;
 use App\Repository\CounterGuideRepository;
 use App\Entity\CounterGuide;
+use App\Entity\Rune;
 use App\Repository\ChampionRepository;
 use Dom\Entity;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\RuneRepository;
 
 class NotesService
 {
-    public function __construct(private CounterGuideRepository $counterRepo, private ChampionRepository $championRepo,private EntityManagerInterface $entityManager)
+    public function __construct(private CounterGuideRepository $counterRepo, private ChampionRepository $championRepo,private EntityManagerInterface $entityManager, private RuneRepository $runeRepo)
     {
     }
 
@@ -63,14 +65,17 @@ class NotesService
     {
         $newCounterGuide = new CounterGuide();
         $newCounterGuide->setRole($formData['role']);
-         
         $newCounterGuide->setChampion($this->championRepo->findoneby(['name' => $formData['champion']]));
-        
         $newCounterGuide->setTargetChampion($this->championRepo->findoneby(['name' => $formData['targetChampion']]));
         $newCounterGuide->setNotes($formData['notes']);
         $newCounterGuide->setUser($user);
 
-        $runes =[];
+        $runes =[
+            $this->runeRepo->findoneby(['name' => $formData['rune1']]),
+            $this->runeRepo->findoneby(['name' => $formData['rune2']]),
+            $this->runeRepo->findoneby(['name' => $formData['rune3']]),
+            $this->runeRepo->findoneby(['name' => $formData['rune4']]),   
+        ];
         
         foreach ($runes as $rune) {
             $newCounterGuide->addRune($rune);
