@@ -18,9 +18,15 @@ class NotesService
         $result = [];
 
         foreach ($counterGuides as $counterGuide) {
+            $runes = $counterGuide->getRunes()->toArray();
+
+            usort($runes, function ($a, $b) {
+                return $a->getTier() <=> $b->getTier(); // Porównanie tierów
+            });
+
             $result[] = [
                 'counterGuide' => $counterGuide,              // Obiekt CounterGuide
-                'runes' => $counterGuide->getRunes()->toArray() // Tablica run
+                'runes' => $runes // Tablica run
             ];
         }
 
@@ -32,9 +38,15 @@ class NotesService
         $counterGuides = $this->counterRepo->getCounterGuideById($user, $id);
         
         foreach ($counterGuides as $counterGuide) {
+            $runes = $counterGuide->getRunes()->toArray();
+
+            usort($runes, function ($a, $b) {
+                return $a->getTier() <=> $b->getTier(); // Porównanie tierów
+            });
+
             $result[] = [
                 'counterGuide' => $counterGuide,              // Obiekt CounterGuide
-                'runes' => $counterGuide->getRunes()->toArray() // Tablica run
+                'runes' => $runes // Tablica run
             ];
         }
 

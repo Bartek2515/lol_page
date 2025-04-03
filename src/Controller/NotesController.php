@@ -41,7 +41,7 @@ final class NotesController extends AbstractController
         }
         
         if ($request->isMethod('POST')) {
-            
+            return $this->redirectToRoute('app_counter_guide');
         }
         
         return $this->render('notes/edit.html.twig',[
@@ -66,8 +66,8 @@ final class NotesController extends AbstractController
             'counterGuides' => $counterGuides,
         ]);
     }
-    #[Route('/add/{id}', name: 'app_add_counter_guide')]
-    public function add($id, Request $request): Response
+    #[Route('/add', name: 'app_add_counter_guide')]
+    public function add(Request $request): Response
     {
         $user = $this->getUser();
         $counterGuides = $this->notesService->getCounterGuideById($user, $id);

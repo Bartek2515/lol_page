@@ -21,6 +21,7 @@
             <th class="p-2 border border-gray-300">Tier 1 runa</th>
             <th class="p-2 border border-gray-300">Tier 2 runa</th>
             <th class="p-2 border border-gray-300">Tier 3 runa</th>
+            <th class="p-2 border border-gray-300">Tier 4 runa</th>
         </tr>
     </thead>
     <tbody>
@@ -51,6 +52,11 @@
 
         {% if item.runes is not empty %}
             <td class="p-2 border border-gray-300">{{ item.runes[2].name }}</td>
+        {% else %}
+            <td class="p-2 border border-gray-300">No rune</td>
+        {% endif %}
+        {% if item.runes is not empty %}
+            <td class="p-2 border border-gray-300">{{ item.runes[3].name }}</td>
         {% else %}
             <td class="p-2 border border-gray-300">No rune</td>
         {% endif %}
