@@ -84,4 +84,12 @@ class NotesService
         $this->entityManager->persist($newCounterGuide);
         $this->entityManager->flush();
     }
+    public function deleteCounterGuide($id)
+    {
+        $counterGuide = $this->counterRepo->find($id);
+        if ($counterGuide) {
+            $this->entityManager->remove($counterGuide);
+            $this->entityManager->flush();
+        }
+    }
 }

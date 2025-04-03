@@ -68,7 +68,7 @@
         </td>
         <td class="p-2 border border-gray-300">
             
-            <a href="#">Delete</a>
+            <a href="{{ path('app_delete_counter_guide', {'id': item.counterGuide.id}) }}">Delete</a>
         </td>
     </tr>
     {% endfor %} 

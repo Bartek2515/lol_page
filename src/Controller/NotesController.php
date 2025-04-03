@@ -52,19 +52,14 @@ final class NotesController extends AbstractController
     public function delete($id, Request $request): Response
     {
         $user = $this->getUser();
-        $counterGuides = $this->notesService->getCounterGuideById($user, $id);
         
         if (!$user) {
             return $this->redirectToRoute('app_login');
         }
         
-        if ($request->isMethod('POST')) {
-            
-        }
+        $this->notesService->deleteCounterGuide($id);
         
-        return $this->render('notes/delete.html.twig',[
-            'counterGuides' => $counterGuides,
-        ]);
+        return $this->redirectToRoute('app_counter_guide');
     }
     
     #[Route('/add', name: 'app_add_counter_guide')]
@@ -79,11 +74,13 @@ final class NotesController extends AbstractController
         
         if ($request->isMethod('POST')) {
             $this->notesService->addCounterGuide($request->request->all(), $user);
+            return $this->redirectToRoute('app_counter_guide');
         }
         
         
         return $this->render('notes/add.html.twig',[
-            
+            // 'champions' => ,
+            // 'rune1' => 
         ]);
     }
 }
