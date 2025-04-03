@@ -96,4 +96,28 @@ class NotesService
     {
         return $this->runeRepo->findBy(['tier' => $tier]);
     }
+    public function editCounterGuide($formData,$id)
+    {
+        $counterGuide = $this->counterRepo->find($id);
+        if ($counterGuide) {
+            $counterGuide->setRole($formData['role']);
+            $counterGuide->setChampion($this->championRepo->findoneby(['name' => $formData['champion']]));
+            $counterGuide->setTargetChampion($this->championRepo->findoneby(['name' => $formData['targetChampion']]));
+            $counterGuide->setNotes($formData['notes']);
+            
+            $runes =[
+                $this->runeRepo->findoneby(['name' => $formData['rune1']]),
+                $this->runeRepo->findoneby(['name' => $formData['rune2']]),
+                $this->runeRepo->findoneby(['name' => $formData['rune3']]),
+                $this->runeRepo->findoneby(['name' => $formData['rune4']]),   
+            ];
+            
+            foreach ($runes as $rune) {
+                $counterGuide->addRune($rune);
+            }
+    
+            $this->entityManager->persist($counterGuide);
+            $this->entityManager->flush();
+        }
+    }
 }

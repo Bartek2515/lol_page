@@ -41,7 +41,7 @@ final class NotesController extends AbstractController
         }
         
         if ($request->isMethod('POST')) {
-            dd($request->request->get('role'));
+            $this->notesService->editCounterGuide($request->request->all(),$id);
         }
         
         return $this->render('notes/edit.html.twig',[
