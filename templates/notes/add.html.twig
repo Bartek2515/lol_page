@@ -24,13 +24,34 @@
         <input type="text" name="notes" placeholder="Notes" value="">
        
         <input type="text" name="tree" placeholder="Tree" value="">
+        
         <select name="rune1">
             <option value="">Wybierz runę 1</option>
+            {% for rune in rune1 %}
+                <option value="{{ rune.name }}">{{ rune.name }}</option>
+            {% endfor %}
         </select>
-        <input type="text" name="rune1" placeholder="Rune 1" value="">
-        <input type="text" name="rune2" placeholder="Rune 2" value="">
-        <input type="text" name="rune3" placeholder="Rune 3" value="">
-        <input type="text" name="rune4" placeholder="Rune 4" value="">
+        
+        <select name="rune2">
+            <option value="">Wybierz runę 2</option>
+            {% for rune in rune2 %}
+                <option value="{{ rune.name }}">{{ rune.name }}</option>
+            {% endfor %}
+        </select>
+        
+        <select name="rune3">
+            <option value="">Wybierz runę 3</option>
+            {% for rune in rune3 %}
+                <option value="{{ rune.name }}">{{ rune.name }}</option>
+            {% endfor %}
+        </select>
+        
+        <select name="rune4">
+            <option value="">Wybierz runę 4</option>
+            {% for rune in rune4 %}
+                <option value="{{ rune.name }}">{{ rune.name }}</option>
+            {% endfor %}
+        </select>
         
         
         <input type="submit" value="Submit">

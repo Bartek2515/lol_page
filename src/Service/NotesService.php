@@ -92,4 +92,8 @@ class NotesService
             $this->entityManager->flush();
         }
     }
+    public function getRunesByTier($tier)
+    {
+        return $this->runeRepo->findBy(['tier' => $tier]);
+    }
 }

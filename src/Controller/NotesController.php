@@ -80,7 +80,10 @@ final class NotesController extends AbstractController
         
         return $this->render('notes/add.html.twig',[
             // 'champions' => ,
-            // 'rune1' => 
+            'rune1' => $this->notesService->getRunesByTier(1),
+            'rune2' => $this->notesService->getRunesByTier(2),
+            'rune3' => $this->notesService->getRunesByTier(3),
+            'rune4' => $this->notesService->getRunesByTier(4),
         ]);
     }
 }
