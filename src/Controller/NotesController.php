@@ -42,6 +42,7 @@ final class NotesController extends AbstractController
         
         if ($request->isMethod('POST')) {
             $this->notesService->editCounterGuide($request->request->all(),$id);
+            return $this->redirectToRoute('app_counter_guide');
         }
         
         return $this->render('notes/edit.html.twig',[
