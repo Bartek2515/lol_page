@@ -8,38 +8,47 @@ export default class extends Controller {
         
     }
 
-    updateChildOptions() {
+    async updateChildOptions() {
         const parentValue = this.parentTarget.value;
         const childSelect = this.childTarget;
-        const secondary_child_select = this.child2Target;
+        const secondaryChildSelect = this.child2Target;
        
         console.log(this.parentTarget.value)
         // Wyczyść obecne opcje
         childSelect.innerHTML = '<option value="">Wybierz Champion</option>';
-        secondary_child_select.innerHTML = '<option value="">Wybierz Champion</option>';
+        secondaryChildSelect.innerHTML = '<option value="">Wybierz Champion</option>';
 
+        if (!parentValue) return;
         
-        const options = {
-            'Mid': [
-                { value: '1a', text: 'Podkategoria 1A' },
-                { value: '1b', text: 'Podkategoria 1B' },
-            ],
-            'Top': [
-                { value: '2a', text: 'Podkategoria 2A' },
-                { value: '2b', text: 'Podkategoria 2B' },
-            ],
-        };
-
-        // Dodaj nowe opcje na podstawie wyboru rodzica
-        if (parentValue && options[parentValue]) {
-            options[parentValue].forEach(option => {
-                const opt = document.createElement('option');
-                opt.value = option.value;
-                opt.text = option.text;
-                childSelect.appendChild(opt.cloneNode(true));
-                secondary_child_select.appendChild(opt.cloneNode(true));
+        try {
+           
+            const response = await fetch(`/api/champions/${parentValue.toLowerCase()}`, {
+                headers: {
+                    'Accept': 'application/json',
+                },
             });
-        }
+
+            if (!response.ok) {
+                throw new Error('Błąd pobierania danych');
+            }
+            
+            const options = await response.json();
+            console.log(options);
+            options.forEach(option => {
+                console.log(option);
+                const opt = document.createElement('option');
+                opt.value = option;
+                opt.text = option;
+                childSelect.appendChild(opt.cloneNode(true));
+                secondaryChildSelect.appendChild(opt.cloneNode(true));
+            });
+
+            
+        } catch (error) {
+            console.error('Fetch error:', error);
+            childSelect.innerHTML = '<option value="">Błąd</option>';
+            secondaryChildSelect.innerHTML = '<option value="">Błąd</option>';
+        } 
     }
 
     // Wywołaj aktualizację przy zmianie rodzica
