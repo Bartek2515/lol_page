@@ -4,7 +4,7 @@ export default class extends Controller {
     static targets = ["input", "results"]
     
     connect() {
-        console.log("wyszukiwarka")
+        console.log("wyszukiwarka");
     }
 
     filter() {

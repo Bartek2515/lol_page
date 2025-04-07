@@ -9,8 +9,8 @@
             </div>
 {% endif %}
     
-    <form method="POST" action="{{ path('app_add_counter_guide') }}">
-        <select name="role" data-controller="symfony--ux-autocomplete--autocomplete" required>
+    <form method="POST" action="{{ path('app_add_counter_guide') }} " data-controller="select">
+        <select name="role" data-select-target="parent" data-action="change->select#parentChanged" required>
             <option value="">Wybierz rolę</option>
             <option value="Top">Top</option>
             <option value="Jungle">Jungle</option>
@@ -19,8 +19,18 @@
             <option value="Support">Support</option>
         </select>
         
-        <input type="text" name="champion" placeholder="Champion" value="" required>
-        <input type="text" name="targetChampion" placeholder="Target Champion" value="" required>
+        <select name="champion" data-select-target="child" required>
+            <option value="">Wybierz champion</option>
+            
+        </select>
+        <select name="targetChampion" data-select-target="child2" required>
+            <option value="">Wybierz Target Champion</option>
+            
+        </select>
+        
+        {# <input type="text" name="champion" placeholder="Champion" value="" required>
+        
+        <input type="text" name="targetChampion" placeholder="Target Champion" value="" required> #}
         <input type="text" name="notes" placeholder="Notes" value="" required>
        
         <input type="text" name="tree" placeholder="Tree" value="" required>
