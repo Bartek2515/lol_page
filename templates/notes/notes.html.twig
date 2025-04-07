@@ -14,8 +14,9 @@
          data-search-target="input" 
          data-action="input->search#filter" 
          placeholder="Szukaj...">
+    
          
-    <table class="border border-gray-300">
+    {# <table class="border border-gray-300">
         <thead>
             <tr>
                 <th class="p-2 border border-gray-300">Rola</th>
@@ -78,6 +79,54 @@
         </tr>
         {% endfor %} 
         </tbody>
-    </table>
+    </table> #}
+    <div class="flex-row">
+        <div class="grid grid-cols-8">
+            <div class="border">
+                <h1>rola</h1>
+            </div>
+            <div class="border">
+                <h1>Postać którą grasz</h1>
+            </div>
+            <div class="border">
+                <h1>Postać na którą grasz</h1>
+            </div>
+            <div class="col-span-3 border ">
+                <h1>Notatka</h1>
+            </div>
+            <div class="border">
+                <h1>runy</h1>
+            </div>
+            <div class="border">
+                <h1>Edycja</h1>
+            </div>
+        </div>
+        {% for item in counterGuides %}
+            <div class="grid grid-cols-8" data-search-value="{{item.counterGuide.role ~ " " ~ item.counterGuide.champion.name ~ " " ~ item.counterGuide.targetChampion.name ~ " " ~ item.counterGuide.notes}}">
+                <div class="border">
+                    {{ item.counterGuide.role }}
+                </div>
+                <div class="border">
+                    {{ item.counterGuide.champion.name }}
+                </div>
+                <div class="border">
+                   {{ item.counterGuide.targetChampion.name }}
+                </div>
+                <div class="col-span-3 border">
+                    {{ item.counterGuide.notes }}
+                </div>
+                <div class="border">
+                    {{ item.runes[0].name }}
+                    {{ item.runes[1].name }}
+                    {{ item.runes[2].name }}
+                    {{ item.runes[3].name }}
+                </div>
+                <div class="border">
+                    <a href="{{ path('app_edit_counter_guide', {'id': item.counterGuide.id}) }}">Edit</a>
+                    <a href="{{ path('app_delete_counter_guide', {'id': item.counterGuide.id}) }}">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

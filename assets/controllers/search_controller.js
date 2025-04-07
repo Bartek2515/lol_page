@@ -14,7 +14,7 @@ export default class extends Controller {
         items.forEach(item => {
           const value = item.dataset.searchValue.toLowerCase();
           console.log("Value:", value, "Includes query?", value.includes(query));
-          item.style.display = value.includes(query) ? "block" : "none";
+          item.style.display = value.includes(query) ? "grid" : "none";
         });
     }
 }
