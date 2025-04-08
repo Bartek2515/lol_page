@@ -15,71 +15,6 @@
          data-action="input->search#filter" 
          placeholder="Szukaj...">
     
-         
-    {# <table class="border border-gray-300">
-        <thead>
-            <tr>
-                <th class="p-2 border border-gray-300">Rola</th>
-                <th class="p-2 border border-gray-300">Postać którą grasz</th>
-                <th class="p-2 border border-gray-300">Postać na którą grasz</th>
-                <th class="p-2 border border-gray-300">Notatka</th>
-                <th class="p-2 border border-gray-300">Drzewko runy</th>
-                <th class="p-2 border border-gray-300">Tier 1 runa</th>
-                <th class="p-2 border border-gray-300">Tier 2 runa</th>
-                <th class="p-2 border border-gray-300">Tier 3 runa</th>
-                <th class="p-2 border border-gray-300">Tier 4 runa</th>
-            </tr>
-        </thead>
-        <tbody data-search-target="results">
-        {% for item in counterGuides %}
-        <tr data-search-value="{{item.counterGuide.role ~ " " ~ item.counterGuide.champion.name ~ " " ~ item.counterGuide.targetChampion.name ~ " " ~ item.counterGuide.notes}}">
-            <td class="p-2 border border-gray-300">{{ item.counterGuide.role }}</td>
-            <td class="p-2 border border-gray-300">{{ item.counterGuide.champion.name }}</td>
-            <td class="p-2 border border-gray-300">{{ item.counterGuide.targetChampion.name }}</td>
-            <td class="p-2 border border-gray-300">{{ item.counterGuide.notes }}</td>
-            
-            {% if item.runes is not empty %}
-                <td class="p-2 border border-gray-300">{{ item.runes[0].tree }}</td>
-            {% else %}
-                <td class="p-2 border border-gray-300">No tree</td>
-            {% endif %}
-            
-            {% if item.runes is not empty %}
-                <td class="p-2 border border-gray-300">{{ item.runes[0].name }}</td>
-            {% else %}
-                <td class="p-2 border border-gray-300">No rune</td>
-            {% endif %}
-
-            {% if item.runes is not empty %}
-                <td class="p-2 border border-gray-300">{{ item.runes[1].name }}</td>
-            {% else %}
-                <td class="p-2 border border-gray-300">No rune</td>
-            {% endif %}
-
-            {% if item.runes is not empty %}
-                <td class="p-2 border border-gray-300">{{ item.runes[2].name }}</td>
-            {% else %}
-                <td class="p-2 border border-gray-300">No rune</td>
-            {% endif %}
-            {% if item.runes is not empty %}
-                <td class="p-2 border border-gray-300">{{ item.runes[3].name }}</td>
-            {% else %}
-                <td class="p-2 border border-gray-300">No rune</td>
-            {% endif %}
-
-            
-            <td class="p-2 border border-gray-300">
-                
-                <a href="{{ path('app_edit_counter_guide', {'id': item.counterGuide.id}) }}">Edit</a>
-            </td>
-            <td class="p-2 border border-gray-300">
-                
-                <a href="{{ path('app_delete_counter_guide', {'id': item.counterGuide.id}) }}">Delete</a>
-            </td>
-        </tr>
-        {% endfor %} 
-        </tbody>
-    </table> #}
     <div class="flex-row">
         <div class="grid grid-cols-8">
             <div class="border">
@@ -116,10 +51,10 @@
                     {{ item.counterGuide.notes }}
                 </div>
                 <div class="border">
-                    {{ item.runes[0].name }}
-                    {{ item.runes[1].name }}
-                    {{ item.runes[2].name }}
-                    {{ item.runes[3].name }}
+                    {{ item.runes[0].name }} <br>
+                    {{ item.runes[1].name }} <br>
+                    {{ item.runes[2].name }} <br>
+                    {{ item.runes[3].name }} <br>
                 </div>
                 <div class="border">
                     <a href="{{ path('app_edit_counter_guide', {'id': item.counterGuide.id}) }}">Edit</a>

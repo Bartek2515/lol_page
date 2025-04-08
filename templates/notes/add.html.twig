@@ -9,7 +9,7 @@
             </div>
 {% endif %}
     
-    <form method="POST" action="{{ path('app_add_counter_guide') }} " data-controller="select">
+    <form method="POST" action="{{ path('app_add_counter_guide') }} " data-controller="select" >
         <select name="role" data-select-target="parent" data-action="change->select#parentChanged" required>
             <option value="">Wybierz rolę</option>
             <option value="Top">Top</option>
@@ -28,41 +28,34 @@
             
         </select>
         
-        {# <input type="text" name="champion" placeholder="Champion" value="" required>
-        
-        <input type="text" name="targetChampion" placeholder="Target Champion" value="" required> #}
         <input type="text" name="notes" placeholder="Notes" value="" required>
        
-        <input type="text" name="tree" placeholder="Tree" value="" required>
         
-        <select name="rune1" data-controller="symfony--ux-autocomplete--autocomplete" required>
-            <option value="">Wybierz runę 1</option>
-            {% for rune in rune1 %}
-                <option value="{{ rune.name }}">{{ rune.name }}</option>
-            {% endfor %}
-        </select>
         
-        <select name="rune2" data-controller="symfony--ux-autocomplete--autocomplete" required>
-            <option value="">Wybierz runę 2</option>
-            {% for rune in rune2 %}
-                <option value="{{ rune.name }}">{{ rune.name }}</option>
-            {% endfor %}
-        </select>
-        
-        <select name="rune3" data-controller="symfony--ux-autocomplete--autocomplete" required>
-            <option value="">Wybierz runę 3</option>
-            {% for rune in rune3 %}
-                <option value="{{ rune.name }}">{{ rune.name }}</option>
-            {% endfor %}
-        </select>
-        
-        <select name="rune4" data-controller="symfony--ux-autocomplete--autocomplete" required>
-            <option value="">Wybierz runę 4</option>
-            {% for rune in rune4 %}
-                <option value="{{ rune.name }}">{{ rune.name }}</option>
-            {% endfor %}
-        </select>
-        
+        <div data-controller="rune">
+            <select name="tree" data-controller="symfony--ux-autocomplete--autocomplete" data-rune-target="tree" data-action="change->rune#parentChanged" required>
+                <option value="">Wybierz drzewko</option>
+                <option value="precision">precision</option>
+                <option value="domination">domination</option>
+                <option value="sorcery">sorcery</option>
+            </select>
+            
+            <select name="rune1" data-controller="symfony--ux-autocomplete--autocomplete" data-rune-target="rune1" required>
+                <option value="">Wybierz runę 1</option>  
+            </select>
+            
+            <select name="rune2" data-controller="symfony--ux-autocomplete--autocomplete" data-rune-target="rune2" required>
+                <option value="">Wybierz runę 2</option>
+            </select>
+            
+            <select name="rune3" data-controller="symfony--ux-autocomplete--autocomplete" data-rune-target="rune3" required>
+                <option value="">Wybierz runę 3</option>
+            </select>
+            
+            <select name="rune4" data-controller="symfony--ux-autocomplete--autocomplete" data-rune-target="rune4" required>
+                <option value="">Wybierz runę 4</option>
+            </select>
+        </div>
         
         <input type="submit" value="Submit">
         

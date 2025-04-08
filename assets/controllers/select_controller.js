@@ -4,19 +4,19 @@ export default class extends Controller {
     static targets = ['parent', 'child','child2'];
 
     connect() {
-        this.updateChildOptions(); // Inicjalna aktualizacja przy załadowaniu
-        
+        this.updateChildOptions(); // Inicjalna aktualizacja przy załadowaniu 
+        console.log("champion selector loaded");
     }
 
     async updateChildOptions() {
         const parentValue = this.parentTarget.value;
         const childSelect = this.childTarget;
-        const secondaryChildSelect = this.child2Target;
+        const childSelect2 = this.child2Target;
        
         console.log(this.parentTarget.value)
         // Wyczyść obecne opcje
         childSelect.innerHTML = '<option value="">Wybierz Champion</option>';
-        secondaryChildSelect.innerHTML = '<option value="">Wybierz Champion</option>';
+        childSelect2.innerHTML = '<option value="">Wybierz Champion</option>';
 
         if (!parentValue) return;
         
@@ -40,14 +40,14 @@ export default class extends Controller {
                 opt.value = option;
                 opt.text = option;
                 childSelect.appendChild(opt.cloneNode(true));
-                secondaryChildSelect.appendChild(opt.cloneNode(true));
+                childSelect2.appendChild(opt.cloneNode(true));
             });
 
             
         } catch (error) {
             console.error('Fetch error:', error);
             childSelect.innerHTML = '<option value="">Błąd</option>';
-            secondaryChildSelect.innerHTML = '<option value="">Błąd</option>';
+            childSelect2.innerHTML = '<option value="">Błąd</option>';
         } 
     }
 
