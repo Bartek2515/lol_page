@@ -9,7 +9,7 @@
             </div>
 {% endif %}
     
-    <form method="POST" action="{{ path('app_add_counter_guide') }} " data-controller="select" >
+    {# <form method="POST" action="{{ path('app_add_counter_guide') }} " data-controller="select" >
         <select name="role" data-select-target="parent" data-action="change->select#parentChanged" required>
             <option value="">Wybierz rolę</option>
             <option value="Top">Top</option>
@@ -86,74 +86,201 @@
         
         <input type="submit" value="Submit">
         
-    </form>
+    </form> #}
+    <div class="flex w-1/2">
+        
+        <div class='flex flex-col w-1/2'>
+            <div data-controller="dropdown" class="relative w-64">
+                <!-- Toggle Button -->
+                <button
+                    type="button"
+                    data-action="click->dropdown#toggle"
+                    data-dropdown-target="button"
+                    class="w-full px-4 py-2 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                    <span data-dropdown-target="selected">Select an option</span>
+                    <svg class="inline-block float-right w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
 
-    <div>
-        <div class="grid grid-cols-3">
-            <div class="border-b ">
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
-            <div class="border-b">
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
-            <div class="border-b">
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
+                <!-- Options List -->
+                <ul
+                    data-dropdown-target="options"
+                    class="absolute hidden w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg"
+                >
+                    <li
+                        data-action="click->dropdown#select"
+                        data-value="1"
+                        class="flex px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    ><img src="https://static.bigbrain.gg/assets/lol/runes/8400.png" alt="">Option 1</li>
+                    <li
+                        data-action="click->dropdown#select"
+                        data-value="2"
+                        class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    >Option 2</li>
+                    <li
+                        data-action="click->dropdown#select"
+                        data-value="3"
+                        class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    >Option 3</li>
+                    <li
+                        data-action="click->dropdown#select"
+                        data-value="3"
+                        class="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    >Option 4</li>
+                </ul>
+
+                <!-- Hidden Input (Optional) -->
+                <input
+                    type="hidden"
+                    name="selected_option"
+                    data-dropdown-target="input"
+                    value=""
+                >
             </div>
             
-            <div>
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
-            <div>
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
-            <div>
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
+            <div class="grid grid-cols-3">
+                <div class="border-b ">
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div class="border-b">
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div class="border-b">
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
 
-            <div>
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
-            <div>
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
-            <div>
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
 
-            <div>
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
-            <div>
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
-            </div>
-            <div>
-                <button>
-                    <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
-                </button>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
             </div>
         </div>
+        
+        <div class='flex flex-col w-1/2'>
+            <select name="tree">
+                <option value="">domination</option>
+                <option value="">sorcery</option>
+                <option value="">resolve</option>
+                <option value="">inspiration</option>
+            </select>
+            <div class="grid grid-cols-3">
+                <div class="border-b ">
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div class="border-b">
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div class="border-b">
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+                <div>
+                    <button>
+                        <img src="https://static.bigbrain.gg/assets/lol/riot_static/15.7.1/img/small-perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+        
     </div>
  
 {% endblock %}
