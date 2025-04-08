@@ -26,14 +26,12 @@ class NotesService
 
         foreach ($counterGuides as $counterGuide) {
             $runes = $counterGuide->getRunes()->toArray();
-
-            usort($runes, function ($a, $b) {
-                return $a->getTier() <=> $b->getTier(); // Porównanie tierów
-            });
-
+            $secondaryRunes = $counterGuide->getSecondaryRunes()->toArray();
+            
             $result[] = [
                 'counterGuide' => $counterGuide,              // Obiekt CounterGuide
-                'runes' => $runes // Tablica run
+                'runes' => $runes, // Tablica run
+                'secondaryRunes' => $secondaryRunes
             ];
         }
 
@@ -47,14 +45,12 @@ class NotesService
         
         foreach ($counterGuides as $counterGuide) {
             $runes = $counterGuide->getRunes()->toArray();
-
-            usort($runes, function ($a, $b) {
-                return $a->getTier() <=> $b->getTier(); // Porównanie tierów
-            });
+            $secondaryRunes = $counterGuide->getSecondaryRunes()->toArray();
 
             $result[] = [
                 'counterGuide' => $counterGuide,              // Obiekt CounterGuide
-                'runes' => $runes // Tablica run
+                'runes' => $runes, // Tablica run
+                'secondaryRunes' => $secondaryRunes
             ];
         }
 
@@ -74,11 +70,22 @@ class NotesService
             $this->runeRepo->findoneby(['name' => $formData['rune1']]),
             $this->runeRepo->findoneby(['name' => $formData['rune2']]),
             $this->runeRepo->findoneby(['name' => $formData['rune3']]),
-            $this->runeRepo->findoneby(['name' => $formData['rune4']]),   
+            $this->runeRepo->findoneby(['name' => $formData['rune4']]),    
+        ];
+        $secondaryRunes = [
+            $this->runeRepo->findoneby(['name' => $formData['rune5']]),
+            $this->runeRepo->findoneby(['name' => $formData['rune6']]),
+            $this->runeRepo->findoneby(['name' => $formData['rune7'],'tree' => 'offense']),
+            $this->runeRepo->findoneby(['name' => $formData['rune8'],'tree' => 'flex']),
+            $this->runeRepo->findoneby(['name' => $formData['rune9'],'tree' => 'defense']),
         ];
         
         foreach ($runes as $rune) {
             $newCounterGuide->addRune($rune);
+            
+        }
+        foreach ($secondaryRunes as $rune){
+            $newCounterGuide->addSecondaryRune($rune);
         }
 
         $this->entityManager->persist($newCounterGuide);

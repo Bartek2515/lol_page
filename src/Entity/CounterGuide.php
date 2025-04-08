@@ -38,11 +38,20 @@ class CounterGuide
      * @var Collection<int, Rune>
      */
     #[ORM\ManyToMany(targetEntity: Rune::class)]
+    #[ORM\JoinTable(name: 'counter_guide_runes')]
     private Collection $runes;
+
+    /**
+     * @var Collection<int, Rune>
+     */
+    #[ORM\ManyToMany(targetEntity: Rune::class)]
+    #[ORM\JoinTable(name: 'counter_guide_secondary_runes')]
+    private Collection $secondaryRunes;
 
     public function __construct()
     {
         $this->runes = new ArrayCollection();
+        $this->secondaryRunes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +139,30 @@ class CounterGuide
     public function removeRune(Rune $rune): static
     {
         $this->runes->removeElement($rune);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Rune>
+     */
+    public function getSecondaryRunes(): Collection
+    {
+        return $this->secondaryRunes;
+    }
+
+    public function addSecondaryRune(Rune $secondaryRune): static
+    {
+        if (!$this->secondaryRunes->contains($secondaryRune)) {
+            $this->secondaryRunes->add($secondaryRune);
+        }
+
+        return $this;
+    }
+
+    public function removeSecondaryRune(Rune $secondaryRune): static
+    {
+        $this->secondaryRunes->removeElement($secondaryRune);
 
         return $this;
     }

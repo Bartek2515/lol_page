@@ -55,6 +55,9 @@
                     {{ item.runes[1].name }} <br>
                     {{ item.runes[2].name }} <br>
                     {{ item.runes[3].name }} <br>
+                    {{ item.secondaryRunes[0].name }} <br>
+                    {{ item.secondaryRunes[1].name }}
+                    {{ dump(item) }}
                 </div>
                 <div class="border">
                     <a href="{{ path('app_edit_counter_guide', {'id': item.counterGuide.id}) }}">Edit</a>
