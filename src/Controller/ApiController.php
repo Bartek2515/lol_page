@@ -31,12 +31,29 @@ final class ApiController extends AbstractController
         // $names = array_map(fn($rune) => $rune->getName(), $runes);
         $parsedRunes = [];
         foreach ($runes as $rune){
-            $a = [];
-            array_push($a, $rune->getName(),$rune->getTier());
-            
-            array_push($parsedRunes, $a);
+            $parsedRunes[] = [
+                'name' => $rune->getName(),
+                'tier' => $rune->getTier(),
+                'img' => $rune->getImg(),
+            ];
         }
 
         return $this->json($parsedRunes);
+    }
+
+    #[Route('/api/rune/{rune}', name: 'app_api_rune',methods:['GET'])]
+    public function getRune(string $rune ,RuneRepository $runeRepo): JsonResponse
+    {
+        
+        $runeData = $runeRepo->findOneBy(['name' => $rune]);
+        
+        $data=[
+            'id' => $runeData->getId(),
+            'tier' => $runeData->getTier(),
+            'tree' => $runeData->getTree(),
+            'name' => $runeData->getName(),
+            'img' => $runeData->getImg()
+        ];
+        return $this->json($data);
     }
 }

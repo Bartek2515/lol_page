@@ -37,7 +37,7 @@ export default class extends Controller {
             }
             
             const options = await response.json();
-            console.log(options);
+            // console.log(options);
 
             let rune1 = [];
             let rune2 = [];
@@ -45,26 +45,27 @@ export default class extends Controller {
             let rune4 = [];
 
             options.forEach(option => {
-                console.log(option[1]);
-                if (option[1] == 1){
-                    rune1.push(option[0]);
+                // console.log(option["tier"]);
+                if (option['tier'] == 1){
+                    rune1.push(option['name']);
                 }
-                if (option[1] == 2){
-                    rune2.push(option[0]);
+                if (option['tier'] == 2){
+                    rune2.push(option['name']);
                 }
-                if (option[1] == 3){
-                    rune3.push(option[0]);
+                if (option['tier'] == 3){
+                    rune3.push(option['name']);
                 }
-                if (option[1] == 4){
-                    rune4.push(option[0]);
+                if (option['tier'] == 4){
+                    rune4.push(option['name']);
                 }
 
             });
-            console.log(rune1);
+            // console.log(rune1);
             rune1.forEach(option => {
                 const opt = document.createElement('option');
                 opt.value = option;
                 opt.text = option;
+                console.log(option);
                 rune1Select.appendChild(opt);
             });
             rune2.forEach(option => {
