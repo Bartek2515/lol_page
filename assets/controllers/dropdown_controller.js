@@ -10,6 +10,7 @@ export default class extends Controller {
         'image_t1_1',
         'image_t1_2',
         'image_t1_3',
+        'image_t1_4',
         'image_t2_1',
         'image_t2_2',
         'image_t2_3',
@@ -19,38 +20,26 @@ export default class extends Controller {
         'image_t4_1',
         'image_t4_2',
         'image_t4_3',
+        'inputRole',
+        'inputChampion',
+        'inputTargetChampion',
+        'inputNotes'
     ];
 
     connect() {
         console.log('Dropdown controller connected');
+        this.setAllRunesByTree("precision");
     }
 
     toggle() {
         this.optionsTarget.classList.toggle('hidden');
     }
 
-    async select(event) {
+    select(event) {
         const selectedValue = event.currentTarget.dataset.value;
         const selectedText = event.currentTarget.textContent.trim();
         const selectedImage = event.currentTarget.dataset.image;
        
-        const image_t1_1 = this.image_t1_1Target
-        const image_t1_2 = this.image_t1_2Target
-        const image_t1_3 = this.image_t1_3Target
-
-        const image_t2_1 = this.image_t2_1Target
-        const image_t2_2 = this.image_t2_2Target
-        const image_t2_3 = this.image_t2_3Target
-
-        const image_t3_1 = this.image_t3_1Target
-        const image_t3_2 = this.image_t3_2Target
-        const image_t3_3 = this.image_t3_3Target
-
-        const image_t4_1 = this.image_t4_1Target
-        const image_t4_2 = this.image_t4_2Target
-        const image_t4_3 = this.image_t4_3Target
-        
-        
         // Update the button text
         this.selectedTarget.textContent = selectedText;
         //update image
@@ -59,55 +48,171 @@ export default class extends Controller {
         }
 
         if(selectedValue == 1){
-            let runes = await this.getRunesByTree("precision");
-            console.log(runes);
-            runes.forEach(rune => {
-                switch (rune["name"]) {
-                    case "press the attack":
-                        image_t1_1.src = rune["img"]
-                        break;
-                    case "lethal tempo":
-                        image_t1_2.src = rune["img"];
-                        break;
-                    case "fleet footwork":
-                        image_t1_3.src = rune["img"];
-                        break;
-                    case "overheal":
-                        image_t2_1.src = rune["img"];
-                        break;
-                    case "triumph":
-                        image_t2_2.src = rune["img"];
-                        break;
-                    case "presence of mind":
-                        image_t2_3.src = rune["img"];
-                        break;
-                    case "alacrity":
-                        image_t3_1.src = rune["img"];
-                        break;
-                    case "haste":
-                        image_t3_2.src = rune["img"];
-                        break;
-                    case "bloodline":
-                        image_t3_3.src = rune["img"];
-                        break;
-                    case "coup de grace":
-                        image_t4_1.src = rune["img"];
-                        break;
-                    case "cut down":
-                        image_t4_2.src = rune["img"];
-                        break;
-                    case "last stand":
-                        image_t4_3.src = rune["img"];
-                        break;
-                    
-                    default:
-                        // Kod do wykonania, jeśli żaden przypadek nie pasuje
-                }
-            });
+           this.setAllRunesByTree("precision");
+        }else if (selectedValue == 2){
+            this.setAllRunesByTree("domination");
+        }else if (selectedValue == 3){
+            this.setAllRunesByTree("sorcery");
+        }else if (selectedValue == 4){
+            this.setAllRunesByTree("resolve");
+        }else if (selectedValue == 5){
+            this.setAllRunesByTree("inspiration");
         }
         // Hide the options
         this.optionsTarget.classList.add('hidden');
     }
+
+    async setAllRunesByTree(tree){
+        const runeToImageMap = {
+            'precision': {
+                'press the attack': this.image_t1_1Target,
+                'lethal tempo': this.image_t1_2Target,
+                'fleet footwork': this.image_t1_3Target,
+                'conqueror': this.image_t1_4Target,
+                'absorb life': this.image_t2_1Target,
+                'triumph': this.image_t2_2Target,
+                'presence of mind': this.image_t2_3Target,
+                'alacrity': this.image_t3_1Target,
+                'haste': this.image_t3_2Target,
+                'bloodline': this.image_t3_3Target,
+                'coup de grace': this.image_t4_1Target,
+                'cut down': this.image_t4_2Target,
+                'last stand': this.image_t4_3Target
+            },
+            'domination': {
+                'electrocute': this.image_t1_1Target,
+                'dark harvest': this.image_t1_2Target,
+                'hail of blades': this.image_t1_3Target,
+                'cheap shot': this.image_t2_1Target,
+                'taste of blood': this.image_t2_2Target,
+                'sudden impact': this.image_t2_3Target,
+                'deep ward': this.image_t3_1Target,
+                'grisly mementos': this.image_t3_2Target,
+                'sixth sense': this.image_t3_3Target,
+                'treasure hunter': this.image_t4_1Target,
+                'relentless hunter': this.image_t4_2Target,
+                'ultimate hunter': this.image_t4_3Target
+            },
+            'sorcery': {
+                'summon aery': this.image_t1_1Target,
+                'arcane comet': this.image_t1_2Target,
+                'phase rush': this.image_t1_3Target,
+                'axiom arcanist': this.image_t2_1Target,
+                'manaflow band': this.image_t2_2Target,
+                'nimbus cloak': this.image_t2_3Target,
+                'transcendence': this.image_t3_1Target,
+                'celerity': this.image_t3_2Target,
+                'absolute focus': this.image_t3_3Target,
+                'scorch': this.image_t4_1Target,
+                'waterwalking': this.image_t4_2Target,
+                'gathering storm': this.image_t4_3Target
+            },
+            'resolve': {
+                'press the attack': this.image_t1_1Target,
+                'lethal tempo': this.image_t1_2Target,
+                'fleet footwork': this.image_t1_3Target,
+                'absorb life': this.image_t2_1Target,
+                'triumph': this.image_t2_2Target,
+                'presence of mind': this.image_t2_3Target,
+                'alacrity': this.image_t3_1Target,
+                'haste': this.image_t3_2Target,
+                'bloodline': this.image_t3_3Target,
+                'coup de grace': this.image_t4_1Target,
+                'cut down': this.image_t4_2Target,
+                'last stand': this.image_t4_3Target
+            },
+            'inspiration': {
+                'press the attack': this.image_t1_1Target,
+                'lethal tempo': this.image_t1_2Target,
+                'fleet footwork': this.image_t1_3Target,
+                'absorb life': this.image_t2_1Target,
+                'triumph': this.image_t2_2Target,
+                'presence of mind': this.image_t2_3Target,
+                'alacrity': this.image_t3_1Target,
+                'haste': this.image_t3_2Target,
+                'bloodline': this.image_t3_3Target,
+                'coup de grace': this.image_t4_1Target,
+                'cut down': this.image_t4_2Target,
+                'last stand': this.image_t4_3Target
+            }
+        };
+
+        try {
+            const runes = await this.getRunesByTree(tree);
+            const treeMap = runeToImageMap[tree];
+
+            if (!treeMap) {
+                console.warn(`No mapping found for tree: ${tree}`);
+                return;
+            }
+
+            runes.forEach(rune => {
+                const imageTarget = treeMap[rune.name];
+                console.log(rune.name)
+                console.log(rune.img);
+                if (imageTarget && rune.img) {
+                    imageTarget.src = rune.img;
+                } else {
+                    console.warn(`Missing mapping or image for rune: ${rune.name}`);
+                }
+            });
+        } catch (error) {
+            console.error(`Error setting runes for tree ${tree}:`, error);
+        }
+    }
+    send(event) {
+        console.log(this.selectedTarget.textContent);
+        event.preventDefault();
+        console.log('Sending role:', this.inputRoleTarget.value);
+        
+        const data = new FormData();
+        data.append('role', this.inputRoleTarget.value);
+        data.append('champion', this.inputChampionTarget.value);
+        data.append('targetChampion', this.inputTargetChampionTarget.value);
+        data.append('notes', this.inputNotesTarget.value);
+        
+        const buttons = this.getAllButtonsStates();
+        
+        const runeMap = {
+            '1': 'press the attack',
+            '2': 'lethal tempo',
+            '3': 'fleet footwork',
+            '4': 'conqueror',
+            '5': 'absorb life',
+            '6': 'triumph',
+            '7': 'presence of mind',
+            '8': 'alacrity',
+            '9': 'haste',
+            '10': 'bloodline',
+            '11': 'coup de grace',
+            '12': 'cut down',
+            '13': 'last stand'
+        };
+
+        const gatheredRunes = buttons
+        .filter(button => button.state === "true") // Assuming state is boolean
+        .map(button => runeMap[button.value])
+        .filter(rune => rune !== undefined);
+
+        // Wysyłanie runów jako tablicy
+        gatheredRunes.forEach(rune => data.append('runes[]', rune));
+        console.log(data);
+        fetch('/api/add', {
+            method: 'POST',
+            body: data,
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(result => {
+            console.log('Success:', result);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
     button(event){
         console.log(event.currentTarget);
         const clickedButton = event.currentTarget;
@@ -124,57 +229,20 @@ export default class extends Controller {
             } else {
                 image.classList.remove('grayscale');
             }
-        }
-        
+        } 
     }
+
     getAllButtonsStates(){
         const allButtons = this.element.querySelectorAll('button[name="gridButton"]');
         const buttonStates = Array.from(allButtons).map(button => ({
-            state: button.dataset.state
+            state: button.dataset.state,
+            value: button.dataset.value
         }));
 
         console.log('Stan wszystkich przycisków:', buttonStates);
         return buttonStates
     }
-    async getRuneImg(rune){
-        try {
-           
-            const response = await fetch(`/api/rune/${rune}`, {
-                headers: {
-                    'Accept': 'application/json',
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Błąd pobierania danych');
-            }
-            
-            const runes = await response.json();
-            console.log(runes['img']);
-            return runes["img"];
-            
-        } catch (error) {
-            console.error('Fetch error:', error);
-        }try {
-           
-            const response = await fetch(`/api/rune/${rune}`, {
-                headers: {
-                    'Accept': 'application/json',
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Błąd pobierania danych');
-            }
-            
-            const runes = await response.json();
-            console.log(runes['img']);
-            return runes["img"];
-            
-        } catch (error) {
-            console.error('Fetch error:', error);
-        } 
-    }
+    
     async getRunesByTree(tree){
         try {
            

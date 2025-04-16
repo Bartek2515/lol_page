@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\NotesService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 final class NotesController extends AbstractController
@@ -73,18 +74,8 @@ final class NotesController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         
-        if ($request->isMethod('POST')) {
-            $this->notesService->addCounterGuide($request->request->all(), $user);
-            return $this->redirectToRoute('app_counter_guide');
-        }
-        
         
         return $this->render('notes/add.html.twig',[
-            // 'champions' => ,
-            'rune1' => $this->notesService->getRunesByTier(1),
-            'rune2' => $this->notesService->getRunesByTier(2),
-            'rune3' => $this->notesService->getRunesByTier(3),
-            'rune4' => $this->notesService->getRunesByTier(4),
         ]);
     }
 }

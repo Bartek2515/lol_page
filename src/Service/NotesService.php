@@ -61,29 +61,32 @@ class NotesService
     {
         $newCounterGuide = new CounterGuide();
         $newCounterGuide->setRole($formData['role']);
-        $newCounterGuide->setChampion($this->championRepo->findoneby(['name' => $formData['champion']]));
-        $newCounterGuide->setTargetChampion($this->championRepo->findoneby(['name' => $formData['targetChampion']]));
+        $newCounterGuide->setChampion($this->championRepo->findOneby(['name' => $formData['champion']]));
+        $newCounterGuide->setTargetChampion($this->championRepo->findOneby(['name' => $formData['targetChampion']]));
         $newCounterGuide->setNotes($formData['notes']);
         $newCounterGuide->setUser($user);
-
-        $runes =[
-            $this->runeRepo->findoneby(['name' => $formData['rune1']]),
-            $this->runeRepo->findoneby(['name' => $formData['rune2']]),
-            $this->runeRepo->findoneby(['name' => $formData['rune3']]),
-            $this->runeRepo->findoneby(['name' => $formData['rune4']]),    
-        ];
+        
+        foreach($formData['runes'] as $rune){
+            $newCounterGuide->addRune($this->runeRepo->findOneBy(['name' => $rune]));
+        }
+        // $runes =[
+        //     $this->runeRepo->findOneBy(['name' => $formData['rune1']]),
+        //     $this->runeRepo->findOneBy(['name' => $formData['rune2']]),
+        //     $this->runeRepo->findOneBy(['name' => $formData['rune3']]),
+        //     $this->runeRepo->findOneBy(['name' => $formData['rune4']]),    
+        // ];
         $secondaryRunes = [
-            $this->runeRepo->findoneby(['name' => $formData['rune5']]),
-            $this->runeRepo->findoneby(['name' => $formData['rune6']]),
-            $this->runeRepo->findoneby(['name' => $formData['rune7'],'tree' => 'offense']),
-            $this->runeRepo->findoneby(['name' => $formData['rune8'],'tree' => 'flex']),
-            $this->runeRepo->findoneby(['name' => $formData['rune9'],'tree' => 'defense']),
+            $this->runeRepo->findOneBy(['name' => 'nimbus cloak']),
+            $this->runeRepo->findOneBy(['name' => 'scorch']),
+            $this->runeRepo->findOneBy(['name' => '+10% atack speed','tree' => 'offense']),
+            $this->runeRepo->findOneBy(['name' => '+9 adaptive force','tree' => 'flex']),
+            $this->runeRepo->findOneBy(['name' => '+65 health','tree' => 'defense']),
         ];
         
-        foreach ($runes as $rune) {
-            $newCounterGuide->addRune($rune);
+        // foreach ($runes as $rune) {
+        //     $newCounterGuide->addRune($rune);
             
-        }
+        // }
         foreach ($secondaryRunes as $rune){
             $newCounterGuide->addSecondaryRune($rune);
         }
@@ -113,10 +116,10 @@ class NotesService
             $counterGuide->setNotes($formData['notes']);
             
             $runes =[
-                $this->runeRepo->findoneby(['name' => $formData['rune1']]),
-                $this->runeRepo->findoneby(['name' => $formData['rune2']]),
-                $this->runeRepo->findoneby(['name' => $formData['rune3']]),
-                $this->runeRepo->findoneby(['name' => $formData['rune4']]),   
+                $this->runeRepo->findOneBy(['name' => $formData['rune1']]),
+                $this->runeRepo->findOneBy(['name' => $formData['rune2']]),
+                $this->runeRepo->findOneBy(['name' => $formData['rune3']]),
+                $this->runeRepo->findOneBy(['name' => $formData['rune4']]),   
             ];
             
             foreach ($runes as $rune) {
