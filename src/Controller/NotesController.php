@@ -51,7 +51,7 @@ final class NotesController extends AbstractController
         ]);
     }
     #[Route('/delete/{id}', name: 'app_delete_counter_guide')]
-    public function delete($id, Request $request): Response
+    public function delete($id): Response
     {
         $user = $this->getUser();
         

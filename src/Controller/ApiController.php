@@ -64,7 +64,7 @@ final class ApiController extends AbstractController
 
         try {
             $this->notesService->addCounterGuide($data, $user);
-            return new JsonResponse(['status' => 'success', 'data' => $data,'redirect_url' => $this->generateUrl('app_add_counter_guide')]);
+            return new JsonResponse(['status' => 'success', 'data' => $data,'redirect_url' => $this->generateUrl('app_counter_guide')]);
         } catch (\Exception $e) {
             // $logger->error('Error adding counter guide: ' . $e->getMessage());
             return new JsonResponse(['status' => 'error', 'message' => $e->getMessage()], 500);
